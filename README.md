@@ -6,6 +6,9 @@ https://gist.github.com/josefglatz/dd6ad5e6c146b6d389ab64df3b8c720d
 Postgres cheatsheet 
 https://www.postgresqltutorial.com/postgresql-cheat-sheet/
 
+Example script how to create album, add photos, set coverphoto and also backup database
+https://community.synology.com/enu/forum/1/post/148949
+
 Database is synofoto. This is not a typo, another databse synophoto is for older SynologyMoments.
 
 Connect to database by typing `\c synofoto`.
