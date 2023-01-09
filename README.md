@@ -9,6 +9,40 @@ https://www.postgresqltutorial.com/postgresql-cheat-sheet/
 Example script how to create album, add photos, set coverphoto and also backup database
 https://community.synology.com/enu/forum/1/post/148949
 
+# Allow external connection
+
+https://community.synology.com/enu/forum/17/post/76349
+
+I use DBeaver as a GUI to manage postgre, because pgAdmin was taking 30 seconds for every request, even listing tables.., weird.
+
+```
+1) Install the latest pgAdmin (PostgreSQL GUI)
+2) Go to Synology Security settings->Firewall and open PostgreSQL default port: 5432 (Source) TCP
+3) Go to /etc/postgresql in your SSH terminal and modify these two files (always make a backup):
+pga_hba.conf:
+Add this line:
+host all all <YourComputerIP>/32 trust
+
+In postgresql.conf set the listen_address to:
+listen_addresses = '*'
+4) Restart postgres server: From your SSH client run these commands
+>su posgtgres
+>pg_ctl -m fast restart
+
+After restarting you can check your log file to see if there are any errors:
+tail -f /var/log/postgresql.log
+
+5) From your computer test if the PostgreSQL port is open: telnet <Synology IP> 5432
+6) Run pgAdmin and open a server connection with these parameters
+Host: your synology IP
+Maintenance DB: mediaserver
+Username: postgres
+
+And you will have access to the indexing DB! Be careful not to modify anything that may interfere with the indexing mechanism.
+```
+
+
+
 Database is synofoto. This is not a typo, another databse synophoto is for older SynologyMoments.
 
 Connect to database by typing `\c synofoto`.
